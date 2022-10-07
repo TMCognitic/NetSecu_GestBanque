@@ -9,6 +9,8 @@ namespace GestBanque.Models
             return ((d < 0) ? 0 : d) + ((compte.Solde < 0) ? 0 : compte.Solde);
         }
 
+        public event Action<Compte> PassageEnNegatifEvent;
+
         private string? _numero;
         private double _solde;
         private Personne? _titulaire;
@@ -99,5 +101,11 @@ namespace GestBanque.Models
         }
 
         protected abstract double CalculInteret();
+
+        protected void RaisePassageEnNegatifEvent()
+        {
+            Action<Compte> passageEnNegatifEvent = PassageEnNegatifEvent;
+            passageEnNegatifEvent?.Invoke(this);
+        }
     }
 }

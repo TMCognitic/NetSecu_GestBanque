@@ -1,4 +1,5 @@
-﻿using GestBanque.Models;
+﻿using GestBanque.ExoCarwash;
+using GestBanque.Models;
 using System.Data.Common;
 
 namespace GestBanque
@@ -7,38 +8,47 @@ namespace GestBanque
     {
         static void Main(string[] args)
         {
-            Banque banque = new Banque("Technofutur Bank");
+            Carwash carwash = new Carwash();
+            Voiture v1 = new Voiture("1-ABC-001");
+            Voiture v2 = new Voiture("1-ABC-002");
 
-            Personne chuckNorris = new Personne("Norris", "Chuck", new DateTime(1940, 3, 10));
+            carwash.Traiter(v1);
+            carwash.Traiter(v2);
 
-            Courant compte1 = new Courant("00001", 500, chuckNorris);
 
-            Epargne compte2 = new Epargne("00002", chuckNorris);
 
-            banque.Ajouter(compte1);
-            banque.Ajouter(compte2);
+            //Banque banque = new Banque("Technofutur Bank");
 
-            banque["00001"]?.Depot(-500);
-            banque["00001"]?.Depot(500);
-            banque["00001"]?.Retrait(-750);
-            banque["00001"]?.Retrait(750);
+            //Personne chuckNorris = new Personne("Norris", "Chuck", new DateTime(1940, 3, 10));
 
-            banque["00002"]?.Depot(500);
+            //Courant compte1 = new Courant("00001", 500, chuckNorris);
 
-            banque["00001"]?.AppliquerInteret();
-            banque["00002"]?.AppliquerInteret();
+            //Epargne compte2 = new Epargne("00002", chuckNorris);
 
-            if (banque["00001"] is not null)
-            {
-                Console.WriteLine($"Solde du compte '{banque["00001"]!.Numero}' : {banque["00001"]!.Solde}");
-            }
+            //banque.Ajouter(compte1);
+            //banque.Ajouter(compte2);
 
-            if (banque["00002"] is not null)
-            {
-                Console.WriteLine($"Solde du compte '{banque["00002"]!.Numero}' : {banque["00002"]!.Solde}");
-            }
+            //banque["00001"]?.Depot(-500);
+            //banque["00001"]?.Depot(500);
+            //banque["00001"]?.Retrait(-750);
+            //banque["00001"]?.Retrait(750);
 
-            Console.WriteLine($"Avoir des comptes de {chuckNorris.Prenom} {chuckNorris.Nom} : {banque.AvoirDesComptes(chuckNorris)}");
+            //banque["00002"]?.Depot(500);
+
+            //banque["00001"]?.AppliquerInteret();
+            //banque["00002"]?.AppliquerInteret();
+
+            //if (banque["00001"] is not null)
+            //{
+            //    Console.WriteLine($"Solde du compte '{banque["00001"]!.Numero}' : {banque["00001"]!.Solde}");
+            //}
+
+            //if (banque["00002"] is not null)
+            //{
+            //    Console.WriteLine($"Solde du compte '{banque["00002"]!.Numero}' : {banque["00002"]!.Solde}");
+            //}
+
+            //Console.WriteLine($"Avoir des comptes de {chuckNorris.Prenom} {chuckNorris.Nom} : {banque.AvoirDesComptes(chuckNorris)}");
         }
     }
 }

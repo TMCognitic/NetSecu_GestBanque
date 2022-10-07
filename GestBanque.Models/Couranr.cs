@@ -43,7 +43,12 @@
 
         public override void Retrait(double montant)
         {
+            double oldSolde = Solde;
             Retrait(montant, LigneDeCredit);
+            if(oldSolde >= 0 && Solde < 0)
+            {
+                RaisePassageEnNegatifEvent();
+            }
         }
 
         protected override double CalculInteret()

@@ -21,12 +21,20 @@
 
         public void Ajouter(Compte compte)
         {
-            _comptes[compte.Numero] = compte;
+            compte.PassageEnNegatifEvent += PassageEnNegatifAction;
+            _comptes.Add(compte.Numero, compte);
         }
 
         public void Supprimer(string numero)
         {
-            _comptes.Remove(numero);
+            //if (!_comptes.ContainsKey(numero))
+            //{
+            //    throw new KeyNotFoundException($"la clé '{numero}' n'a été trouvée dans le dictionnaire");
+            //}
+
+            Compte compte = _comptes[numero];
+            compte.PassageEnNegatifEvent -= PassageEnNegatifAction;
+            _comptes.Remove(numero);            
         }
 
         public double AvoirDesComptes(Personne titulaire)
@@ -38,6 +46,11 @@
                     total += compte;
 
             return total;
+        }
+
+        private void PassageEnNegatifAction(Compte compte)
+        {
+            Console.WriteLine($"Le compte {compte.Numero} vient de passer en négatif");
         }
     }
 }
